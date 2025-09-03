@@ -12,7 +12,7 @@ kotlin {
     // which platforms this KMP module supports.
     // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
     androidLibrary {
-        namespace = "com.romanenko.wineup.add"
+        namespace = "com.romanenko.wineup.main"
         compileSdk = 35
         minSdk = 28
 
@@ -33,7 +33,7 @@ kotlin {
     // A step-by-step guide on how to include this library in an XCode
     // project can be found here:
     // https://developer.android.com/kotlin/multiplatform/migrate
-    val xcfName = "addKit"
+    val xcfName = "mainKit"
 
     iosX64 {
         binaries.framework {
@@ -61,10 +61,14 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(libs.kotlin.stdlib)
-                // Add KMP dependencies here
+                implementation(projects.feature.search)
+                implementation(projects.feature.list)
+                implementation(projects.feature.add)
                 implementation(projects.core.navigation)
 
+                implementation(libs.kotlin.stdlib)
+
+                // added libraries
                 implementation(libs.navigation.compose)
 
                 implementation(compose.runtime)
@@ -77,6 +81,7 @@ kotlin {
 
                 implementation(libs.androidx.lifecycle.viewmodelCompose)
                 implementation(libs.androidx.lifecycle.runtimeCompose)
+
             }
         }
 
