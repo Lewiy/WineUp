@@ -1,11 +1,10 @@
 package com.romanenko.wineup.main.bottomnav
 
-import androidx.compose.material.icons.Icons
+import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -14,39 +13,21 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 
 @Composable
 fun AppBottomNavigation(navController: NavController) {
-    val bottomScreens = remember {
-        listOf(
-            BottomScreens.Home,
-            BottomScreens.Search,
-            BottomScreens.Profile
-        )
-    }
+    val currentDestination = navController.currentBackStackEntryAsState().value?.destination
 
     NavigationBar {
-        val currentDestination = navController.currentBackStackEntryAsState().value?.destination
-
         bottomScreens.forEach { screen ->
             val isSelected =
                 currentDestination?.hierarchy?.any { it.hasRoute(screen.route::class) } == true
             NavigationBarItem(
+                selected = isSelected,
                 icon = {
-                    if (isSelected)
-                    //                    Icon(
-//                        modifier = Modifier.size(24.dp),
-//                        painter = painterResource(screen.selectedIcon),
-//                        contentDescription = screen.name
-//                    )
-                    Icons.Default
-                    else Icons.Filled
-//                        Icon(
-//                        modifier = Modifier.size(24.dp),
-//                        painter = painterResource(id = screen.unselectedIcon),
-//                        contentDescription = screen.name
-//                    )
-
+                    Icon(
+                        imageVector = if (isSelected) screen.selectedIcon else screen.unselectedIcon,
+                        contentDescription = screen.name,
+                    )
                 },
                 label = { Text(screen.name) },
-                selected = isSelected,
                 onClick = {
                     navController.navigate(screen.route) {
                         popUpTo(navController.graph.findStartDestination().id) {
@@ -60,3 +41,9 @@ fun AppBottomNavigation(navController: NavController) {
         }
     }
 }
+
+private val bottomScreens = listOf(
+    BottomItem.List,
+    BottomItem.Search,
+    BottomItem.Add
+)
