@@ -2,6 +2,7 @@ rootProject.name = "WineUp"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google {
             mavenContent {
@@ -32,5 +33,5 @@ include(":composeApp")
 include(":feature:search")
 include(":feature:list")
 include(":feature:add")
-include(":feature:main")
+include(":feature:home")
 include(":core:navigation")

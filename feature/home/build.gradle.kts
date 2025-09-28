@@ -9,6 +9,9 @@ kotlin {
             implementation(libs.kotlin.stdlib)
 
             implementation(projects.core.navigation)
+            implementation(projects.feature.search)
+            implementation(projects.feature.list)
+            implementation(projects.feature.add)
             implementation(libs.navigation.compose)
 
             implementation(libs.androidx.lifecycle.viewmodelCompose)

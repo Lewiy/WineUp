@@ -5,7 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.romanenko.wineup.main.navigation.homeScreen
+import com.romanenko.wineup.home.navigation.homeScreen
 import com.romanenko.wineup.navigation.NavigableGraph
 
 
